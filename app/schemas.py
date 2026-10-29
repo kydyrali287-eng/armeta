@@ -1,11 +1,14 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from typing import Literal
 from decimal import Decimal 
 
 class ProjectCreate(BaseModel):
     name: str = Field(min_length=3, max_length = 120)
 # python -c "from app.schemas import ProjectCreate; print (ProjectCreate(name='ConstructionAuditAi'))" 
-
+class ProjectRead(BaseModel):
+    id: int = Field(gt = 0)
+    name: str = Field(min_length = 1)
+    model_config = ConfigDict(from_attributes = True)
 
 class DocumentRead(BaseModel):
     id: int = Field(gt = 0) #идентификатор документа | gt = строго больше нуля
