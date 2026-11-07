@@ -1,7 +1,7 @@
 projects = []
 state = {"next_id" : 0}
 
-def validate_project_name(name):
+def validate_name(name):
     if not isinstance(name, str):
         raise ValueError ("Некорректное название проекта")
     name = name.strip()
@@ -10,7 +10,7 @@ def validate_project_name(name):
     return name
 
 def create_project(projects, name, state):
-    name = validate_project_name(name)
+    name = validate_name(name)
     project = {
         "id" : state["next_id"] + 1,
         "name" : name
@@ -44,7 +44,7 @@ def rename_project(projects, project_id, new_name):
     found = find_p(projects, project_id)
     if found is None:
         return None
-    new_name = validate_project_name(new_name)
+    new_name = validate_name(new_name)
     found["name"] = new_name
     return found
     
